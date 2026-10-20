@@ -1,0 +1,78 @@
+\documentclass[11pt]{article}
+\usepackage{jemma}
+\usepackage{subfiles}
+\usepackage{fancyhdr}
+
+\newcommand{\CP}{\mathbb{CP}}
+\DeclareMathOperator{\GL}{GL}
+\DeclareMathOperator{\SU}{SU}
+\DeclareMathOperator{\ad}{ad}
+\DeclareMathOperator{\End}{End}
+\DeclareMathOperator{\Aut}{Aut}
+\DeclareMathOperator{\Mat}{Mat}
+\DeclareMathOperator{\Tr}{Tr}
+\DeclareMathOperator{\Stab}{Stab}
+\DeclareMathOperator{\hol}{hol}
+\DeclareMathOperator{\YM}{YM}
+\DeclareMathOperator{\CS}{CS}
+\DeclareMathOperator{\Crit}{Crit}
+\DeclareMathOperator{\Deck}{Deck}
+\DeclareMathOperator{\Maps}{Maps}
+\newcommand{\HP}{\mathbb{HP}}
+
+\begin{document}
+
+\begin{titlepage}
+\begin{center}
+\vspace*{2cm}
+{\LARGE\bfseries Instantons and Four-Manifolds\par}
+\vspace{2em}
+{\large Lecture notes from the class of the same name taught by Irving Dai in Fall 2026, transcribed and expanded by Jemma Schroder\par}
+\vspace{1.5em}
+%{\itshape AI disclaimer: these notes were transcribed from hand-written notes using Claude Code.\par}
+\begin{minipage}{0.8\textwidth}
+\small
+\textbf{Acknowledgments:} These notes were typeset with the assistance of Anthropic's Claude; any deviation from my handwritten notes are either expanding a shorthand or my own contribution in post-processing. Most mathematical content is directly from the lectures, everything else, as well as all mistakes, are my own. The style package is a variation on \href{https://web.stanford.edu/~lindrew/}{Andrew Lin's}.
+\end{minipage}
+\end{center}
+\vspace{2em}
+\begingroup
+\sffamily
+\hypersetup{linkcolor=black}
+\tableofcontents
+\endgroup
+\end{titlepage}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+\setlength{\headheight}{14.5pt}
+
+\part{SU(2) Gauge Theory and Donaldson's Theorem}
+\IfFileExists{lecture1.tex}{\fancyhead[C]{Lecture 1}\thispagestyle{plain}\subfile{lecture1}}{}
+\IfFileExists{lecture2.tex}{\clearpage\fancyhead[C]{Lecture 2}\thispagestyle{plain}\subfile{lecture2}}{}
+\clearpage\fancyhead[C]{Lecture 3}\thispagestyle{plain}\subfile{lecture3}
+\clearpage\fancyhead[C]{Lecture 4}\thispagestyle{plain}\subfile{lecture4}
+\IfFileExists{lecture5.tex}{\clearpage\fancyhead[C]{Lecture 5}\thispagestyle{plain}\subfile{lecture5}}{}
+\clearpage\fancyhead[C]{Lecture 6}\thispagestyle{plain}\subfile{lecture6}
+\clearpage\fancyhead[C]{Lecture 7}\thispagestyle{plain}\subfile{lecture7}
+\IfFileExists{lecture8.tex}{\clearpage\fancyhead[C]{Lecture 8}\thispagestyle{plain}\subfile{lecture8}}{}
+\clearpage\fancyhead[C]{Lecture 9}\thispagestyle{plain}\subfile{lecture9}
+\IfFileExists{lecture10.tex}{\clearpage\fancyhead[C]{Lecture 10}\thispagestyle{plain}\subfile{lecture10}}{}
+
+\clearpage
+\thispagestyle{plain}
+\part{Instanton Floer Homology}
+\IfFileExists{lecture11.tex}{\fancyhead[C]{Lecture 11}\thispagestyle{plain}\subfile{lecture11}}{}
+\clearpage\fancyhead[C]{Lecture 12}\thispagestyle{plain}\subfile{lecture12}
+\IfFileExists{lecture13.tex}{\clearpage\fancyhead[C]{Lecture 13}\thispagestyle{plain}\subfile{lecture13}}{}
+\IfFileExists{lecture14.tex}{\clearpage\fancyhead[C]{Lecture 14}\thispagestyle{plain}\subfile{lecture14}}{}
+\IfFileExists{lecture15.tex}{\clearpage\fancyhead[C]{Lecture 15}\thispagestyle{plain}\subfile{lecture15}}{}
+
+\clearpage
+\thispagestyle{plain}
+\part{Applications}
+
+\end{document}

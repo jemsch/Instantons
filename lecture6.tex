@@ -1,0 +1,219 @@
+\documentclass[main]{subfiles}
+\begin{document}
+
+\section*{Lecture 6 // Sept 10 // $U(1)$ Yang-Mills Theory}
+\addcontentsline{toc}{section}{Lecture 6 -- $U(1)$ Yang-Mills Theory}
+
+\begin{recall}
+We defined
+\[
+D_A^\ast : \Omega^1(\End E) \to \Omega^1(\End E), \qquad D_A^\ast = \star D_A \star.
+\]
+The Yang--Mills equation: $D_A^\ast F_A = 0$.
+
+Connections which satisfy the YM equation are called YM connections, and are the critical points of the Yang--Mills functional
+\[
+YM(\nabla) = \int_M \|F_A\|_{L^2}^2\, d\mathrm{vol}.
+\]
+When the instanton number $k$ is:
+\begin{itemize}
+	\item $k>0$: self dual connections are the absolute minima
+	\item $k<0$: anti self dual connections are the absolute maxima
+\end{itemize}
+
+Today: we'll make the connection with Hodge theory explicit.
+\end{recall}
+
+Some remarks:
+\begin{enumerate}
+	\item Can check that the Yang--Mills equation is invariant under gauge transformations.
+	\item There is an easier way to motivate $D_A$:
+	\[
+	\text{Recall} \quad D_A B = dB + \underbrace{AB-BA}_{\text{Lie bracketing against } A}
+	\]
+\end{enumerate}
+
+More concretely: if $B \in \Gamma(\End E)$, $s \in \Gamma(E)$, should expect some sort of Leibniz rule:
+\[
+\nabla(Bs) = (?)s + B(\nabla s)
+\]
+and compute what the covariant derivative of $B$ ($=(?)$) by completing the rest.
+
+\bigskip
+\subsection*{$U(1)$ Yang-Mills Theory}
+
+Fix a $\mathrm{U}(1)$ bundle $L$ over $(M^4,g)$ a Riemannian four manifold. To find the Yang-Mills connections on $L$, we must find $\mc{A}$, the action of $\mc{G}$, the explicit spaces and maps in the cochain complex. With those in hand, we can recast the Bianchi Identity and the Yang Mills condition in the $U(1)$ setting. 
+
+The space of $\mathrm{U}(1)$ connections is $\mc{A} = \{\nabla = d+ia\}$ where $a$ is locally an element of $\Omega^1(M)$. Since $\dim \mathrm{U}(1) = 1$, our matrices are $1\times 1$, i.e., functions.
+For $L$ a line bundle, $\End(L)$ is a trivial bundle, so the gauge group is smooth maps of $M \to S^1$, $\mc{G} = \Aut L = \mathrm{Maps}(M,S^1)$.
+Then $\mc{G}$ acts on $\mc{A}$ by $a \mapsto g^{-1}ag + g^{-1}dg$, but since $\mathrm{U}(1)$ is abelian, $g^{-1}ag = a$ and this action simplifies to $a \mapsto a + g^{-1}dg$.
+
+We now consider the cochain complex \[D_A: \Omega^i(\mathrm{ad}\, L) \to \Omega^{i+1}(\mathrm{ad}\, L).\] Since $\Aut L = \mathrm{Maps}(M,S^1)$, $\mathrm{ad}\, L \cong M$ so the spaces $\Omega^i(\mathrm{ad}\, L)$ are actually the usual deRham vector spaces $\Omega^i(M)$. 
+Moreover, the maps $D_A$ turn out to be the same as the usual deRham maps! So in the $U(1)$ setting, we just recover the usual deRham complex.
+\begin{exercise}
+Check that $D_A = d$.
+\end{exercise}
+
+In this simpler setting, the Bianchi identity ($D_A F_A = 0$) becomes $d(da) = 0 \Rightarrow d^2=0$, which we already know to be true. The Yang Mills equation ($D_A^\ast F_A = 0$) becomes $d^\ast d = 0$, so in this setting, YM connections are exactly those which are harmonic.
+
+\begin{lemma}
+A $\mathrm{U}(1)$ Yang Mills connection is precisely a $\mathrm{U}(1)$ connection with harmonic curvature.
+\end{lemma}
+
+The upshot here is that Self Dual Yang Mills connections are $\mathrm{U}(1)$ connections with self-dual curvature, and Anti Self Dual Yang Mills connections are those with anti-self-dual curvature.
+
+We've translated what it means to be Yang Mills, but what about action of the gauge group? There aren't that many harmonic forms; in particular, there are only as many as the number of de Rham cohomology classes. But in principle, there could be many connections with the same curvature. And these are the objects we actually care about. 
+Recall that the Yang Mills moduli space is a space of \underline{connections}, not curvatures, even though the condition is on curvatures.
+
+So we must ask: how well do we understand the equivalence relation on connections? Formally, what is action $\mc{G} \curvearrowright \mc{A}$? A connection $a$ maps to $a+g^{-1}dg$, so our question becomes what is $g^{-1}dg$? To answer this, we first simplify the topology of $M$.
+
+\begin{lemma}
+Let $H_1(M)=0$. Then two connections $\nabla,\nabla'$ differ by a $\mathrm{U}(1)$ gauge transformation iff they differ by an exact 1-form: $\nabla-\nabla' = i\,dh$ for some purely imaginary $h \in \Omega^0$.
+\end{lemma}
+
+\begin{remark}
+In general, $\nabla-\nabla' \in \Omega^1(\mathrm{ad}\,L)$, but $\mathrm{ad}\,L$ is trivial for $\mathrm{U}(1)$, so $\nabla-\nabla' \in \Omega^1$.
+\end{remark}
+
+\begin{proof}\
+	\begin{itemize}
+	\item[($\Leftarrow$)] If $\nabla-\nabla'$ is an exact 1-form, then $\nabla-\nabla' = i\,dh$. Set $g=e^{ih}$. This is an $S^1$-valued function on $M$. Thus
+\[
+g^{-1}dg = (e^{ih})^{-1}d(e^{ih}) = \frac{1}{e^{ih}}\cdot i\,dh\cdot e^{ih} = i\,dh.
+\]
+
+\item[$\Rightarrow$] If $\nabla - \nabla' = g^{-1}dg$ for some $g:M\to S^1$, to get the difference as an exact 1-form, we must first get a 1-form. Thus we must lift $g:M\to S^1$ to a map to $\RR$:
+\[
+\begin{array}{ccccc}
+ & & & & \RR \\
+ & & \nearrow{\scriptstyle h = \log g} & & \Big\downarrow{\scriptstyle \exp} \\
+ & M & \xrightarrow{\hspace{1em} g \hspace{1em}} & & S^1
+\end{array}
+\]
+By covering space theory, a lift of $g$ exists if $g^\ast(H_1(M))=0$. By assumption, $H_1(M)=0$, so $g$ lifts to $h := \log g : M \to \RR$.
+
+Now set $g=e^{ih}$. Then $g^{-1}dg = i\,dh$, thus $\nabla-\nabla'$ is an exact one form.
+	\item  
+	\end{itemize}
+\end{proof}
+
+\begin{lemma}
+Let $H_1(M)=0$. Then for each $L$, there exists a unique (up to gauge transformation) YM $\mathrm{U}(1)$ connection on $L$. The curvature of this $L$ is given by the unique harmonic representative of $c_1(L)$.
+\end{lemma}
+
+\begin{proof}
+We first show that every $L$ admits a YM connection. Let $\omega$ be the (unique) harmonic representative of $c_1(L)$, and pick any $\mathrm{U}(1)$ connection $\nabla$ on $L$. We know that $\nabla$ has curvature $d\alpha$, where $[d\alpha]=[\omega]$, since Chern classes are well-defined. From $\nabla$, we now build a connection whose curvature is literally $\omega$, not just a 2-form in the same equivalence class as $\omega$.
+
+Since $\mc{A}$ is affine over $i\Omega^1(M)$, by choosing an appropriate $b\in\Omega^1(M;\RR)$, we can define another connection $\nabla' := \nabla + ib$ whose curvature is $d\alpha + i\,db = \omega$.
+
+We now must show $\nabla'$ is unique up to $\mathrm{U}(1)$ gauge. Any other $\nabla$ must have the same curvature by definition.
+
+Thus
+\[
+0 \equiv F_\alpha - F_{\alpha'} = d(\alpha-\alpha')
+\]
+\[
+\equiv \nabla-\nabla' \text{ is a closed 1-form}
+\]
+\[
+\equiv \nabla-\nabla' \text{ is an exact 1-form, since } H^1_{dR}=0
+\]
+\[
+\equiv \nabla-\nabla' = dh \text{ for some } h \in \Omega^0(M)
+\]
+\[
+\equiv \nabla-\nabla' = g^{-1}dg \text{ for some } g:M\to S^1
+\]
+So $\nabla$ and $\nabla'$ must differ by a gauge transformation, making them the same element modulo gauge.
+\end{proof}
+
+The upshot here is that the Yang Mills moduli space in $\mathrm{U}(1)$ is a single point for each choice of $L$.
+
+\begin{lemma}
+Let $H_1(M)=0$.
+\begin{itemize}
+	\item If $M$ is positive definite, for every $L$, the YM connection is SD.
+	\item If $M$ is negative definite, for every $L$, the YM connection is ASD.
+\end{itemize}
+\end{lemma}
+
+Before we prove this lemma, we need to prove that harmonic 2-forms also decompose into self dual and anti self dual subspaces.
+
+\begin{proposition}
+The space of harmonic 2-forms decomposes as the direct sum
+\[
+\mc{H}^2 = \mc{H}^2_+ \oplus \mc{H}^2_-,
+\]
+where $\mc{H}^2_+ = \{\text{self-dual harmonic 2-forms}\}$ and $\mc{H}^2_- = \{\text{anti-self-dual harmonic 2-forms}\}$.
+\end{proposition}
+
+\begin{proof}
+Recall $\Omega^2 = \Omega^2_+ \oplus \Omega^2_-$. Thus any $\omega \in \mc{H}^2$ splits as $\omega = \omega_+ + \omega_-$, but $\omega_\pm$ are not necessarily harmonic.
+
+By harmonicity,
+\[
+\begin{cases} d\omega = 0 \ \Rightarrow\ d\omega_+ + d\omega_- = 0 \\ d^\ast\omega = 0\ \Rightarrow\ d^\ast\omega_+ + d^\ast\omega_- = 0. \end{cases}
+\]
+By (anti) self-duality of $\omega_\pm$,
+\[
+\begin{cases} \star d\star(\omega_+) = \omega_+ \\ \star d \star(\omega_-) = -\omega_- .\end{cases}
+\]
+Therefore $d^\ast\omega_+ = \star d\omega_+$ and $d^\ast\omega_- = -\star d\omega_+$, thus
+\[
+\star d\omega_+ - \star d\omega_- = 0
+\]
+\[
+\star d\omega_+ = \star d\omega_- = 0
+\]
+\[
+d\omega_+ = d\omega_- = 0.
+\]
+So $\omega_\pm$ are themselves harmonic.
+\end{proof}
+
+We can now prove the lemma.
+
+\begin{proof}[Proof of Lemma]
+If $M$ is positive definite, $Q_M$ is strictly positive. Therefore for any $\alpha \in \mc{H}^2(M)$,
+\[
+Q_M(\alpha,\alpha) = \int_M \alpha\wedge\alpha = \|\alpha\|_{L^2} > 0,
+\]
+so there are no ASD harmonic forms.
+
+The same argument holds for negative definite.
+\end{proof}
+
+Armed with these results for $\mathrm{U}(1)$ connections, we can now try to upgrade these to results for $\SU(2)$ connections. In particular, sometimes an $\SU(2)$ connection will split as the sum of two $\mathrm{U}(1)$ connections.
+
+\subsection*{Split Yang-Mills Connections}
+
+Let $E \to M$ be an $\SU(2)$ bundle which splits as $E = L\oplus L'$, where $L$ and $L'$ are $\mathrm{U}(1)$ bundles. If so, $L'$ must be $\bar L$ by the matrix constraints for $\mathrm{U}(1)$ and $\SU(2)$.
+
+So we'll analyse $\SU(2)$ connections by first restricting to split connections $\nabla = \nabla \oplus \bar\nabla$. The corresponding 1-form matrix for $\nabla$ is
+\[
+A = \begin{pmatrix} i\,da & 0 \\ 0 & -i\,da \end{pmatrix},
+\]
+and the curvature also splits as
+\[
+F_A = \begin{pmatrix} i\,db & 0 \\ 0 & -i\,db \end{pmatrix},
+\]
+where $i\,db$ represents $c_1(L)$ and $-i\,db$ represents $c_1(\bar L) = -c_1(L)$.
+
+\begin{lemma}
+Let $M^4$ be positive definite with $H_1(M)=0$. Take $E$ an $\SU(2)$ bundle over $M$. For each splitting $E = L\oplus\bar L$, there is a unique (modulo gauge) split self-dual YM connection on $E$.
+\end{lemma}
+
+\begin{proof}[Proof (sketch)]
+\begin{enumerate}
+	\item Construct a self-dual $\mathrm{U}(1)$ YM connection $\nabla$ on $L$ as before.
+	\item Check that the conjugate connection $\bar\nabla$ is a self-dual connection on $\bar L$.
+	\item Their sum $\nabla \oplus \bar\nabla$ is thus a self-dual $\SU(2)$ connection on $L\oplus \bar L$.
+	\item We saw that $\nabla$ is unique up to $\mathrm{U}(1)$ gauge. Check that any other split $\SU(2)$ connection $\nabla'\oplus\bar\nabla'$ is gauge equivalent to $\nabla\oplus\bar\nabla$ via some split gauge transformation.
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+If $E$ splits, this splitting happens at the level of a reduction of the structure group. So the local splitting we observed before as a matrix change of basis for $A$ must not only happen in a neighborhood $U_\alpha$, but must be a simultaneous change of basis and transition maps for all matrices $A$ on every neighborhood $U_\alpha$.
+\end{remark}
+
+\end{document}

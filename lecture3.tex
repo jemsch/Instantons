@@ -1,0 +1,273 @@
+\documentclass[main]{subfiles}
+\begin{document}
+
+\section*{Lecture 3 // Sept 1 // Examples \& Hodge Theory}
+\addcontentsline{toc}{section}{Lecture 3 -- Examples \& Hodge Theory}
+
+\begin{recall}
+A connection is a map $\nabla : \Gamma(E) \to \Gamma(T^\ast M \oplus E)$. Locally, connections take the form $\nabla = d+A$ where $A$ is a connection 1-form matrix. Under change of coordinates, $A$ transforms strangely, not by conjugation:
+\[
+A \mapsto g^{-1}Ag + g^{-1}dg
+\]
+where $g$ is the bundle transition function. The curvature of a connection is $F_A := dA + A\wedge A$, and by Chern--Weil theory, the Chern classes are
+\[
+\det\!\left(I - \frac{t}{2\pi}F_A\right).
+\]
+
+\noindent Today, we'll explicitly compute one connection \& its curvature to illustrate them in a toy example. This example will also generalize to help us understand the Yang--Mills moduli space.
+\end{recall}
+
+\subsection*{Example: Connections on $\CP^1 = S^2$}
+
+Recall that $\CP^1 = \{[z:w] \mid z,w \in \CC^2\}$ can be covered with 2 charts, the $z$ chart with all points $[z:w]$ but $[0:1]$, and the $w$ chart. The transition function is $w = \frac{1}{z}$.
+
+Now, consider the $\CC$-line bundle over $\CP^1$ defined by the bundle transition function $g(z) = z^n$. This is the degree-$n$ $\CC$-line bundle where $\CC$-fibers get glued by $z^n$, viewing this as a $1\times 1$ matrix over $\CC$.
+
+\begin{fact}
+These are all the $\CC$ line bundles over $\CP^1$.
+\end{fact}
+
+What do connections on the degree-$n$ line bundle look like? To define a connection, we must write down the connection's 1-form matrix $A$. Since the bundle is a line bundle, $A$ is a $1\times 1$ matrix over $\CC$, i.e., a function $\CC \to \CC$.
+
+Since $A$ is purely local, we must define it in local coordinates. We'll consider the $z$ chart first.
+
+\begin{proposition}
+$A := -n\dfrac{\bar z\, dz}{1+|z|^2}$ defines a connection on the degree $n$ $\CC$-line bundle over $\CP^1$.
+\end{proposition}
+
+\begin{proof}
+To check that $A$ actually defines a connection, we must do the following:
+\begin{enumerate}
+	\item look at $A$ in the other chart
+	\item show that $A$ extends smoothly over the point at $\infty$.
+\end{enumerate}
+Each step requires its own coordinate change:
+\begin{enumerate}
+	\item $A \rightsquigarrow g^{-1}Ag + g^{-1}dg$, the bundle change of coordinates
+	\item  $w = \frac{1}{z}$, the manifold change of coordinates
+\end{enumerate}
+
+1) Recall that the bundle transition function is $g(z) = z^n$.
+
+Thus
+\begin{align*}
+g^{-1}Ag + g^{-1}dg &= z^{-n}\left(-n\frac{\bar z\,dz}{1+|z|^2}\right)z^n + z^{-n}d(z^n) \\
+&= -n\frac{\bar z\,dz}{1+|z|^2} + \frac{nz^{n-1}}{z^n} \\
+&= -n\frac{\bar z\,dz}{1+|z|^2} + \frac{n}{z}
+\end{align*}
+
+2) We now apply the manifold change of coordinates: $w = \frac1z$
+\[
+dz = d\left(\frac1w\right) = \frac{-dw}{w^2}
+\]
+So $-n\dfrac{\bar z\,dz}{1+|z|^2} + \dfrac{n}{z}$ becomes
+\begin{align*}
+\frac{-n\left(\frac1w\left(\frac{-1}{w^2}dw\right)\right)}{1+\left|\frac1w\right|^2} + nw\left(\frac{-1}{w^2}\right)dw &= -n\frac{dw}{w^3\left(1+\left|\frac1w\right|^2\right)} - n\frac{dw}{w} \\
+&=\frac{-n\left(\frac1w\left(\frac{-1}{w^2}dw\right)\right)}{1+\left|\frac1w\right|^2} + nw\left(\frac{-1}{w^2}\right)dw \\
+&= -n\frac{dw}{w^3\left(1+\left|\frac1w\right|^2\right)} - n\frac{dw}{w} \\
+&= n\frac{dw}{w(1+|w|^2)} - n\frac{dw}{w} \\
+&= n\left(\frac{1}{w(1+|w|^2)} - \frac1w\right)dw \\
+&= n\left(\frac{1}{w(1+|w|^2)} - \frac{(1+|w|^2)}{w(1+|w|^2)}\right)dw\\
+&= n\left(\frac{-|w|^2}{w(1+|w|^2)}\right)dw\\
+&= \frac{-n\bar w\,dw}{1+|w|^2}
+\end{align*}
+
+this is a valid 1-form on the $w$-chart, and is defined at $z=\infty \leftrightarrow w=0$.
+
+Thus $A$ defines a valid global 1-form.
+\end{proof}
+
+Note that $A$ itself does not extend as a smooth 1-form on $\CP^1$, since $n\frac{dw}{w(1+|w|^2)}$ is singular at $w=0 \leftrightarrow z=\infty$. 
+It is precisely the addition of the $g^{-1}dg=-n\frac{dw}{w}$ term from the bundle change of coordinates which resolves the issue. So $A$ can be defined globally because of the ``strange'' bundle change-of-coordinates.
+
+We'll now compute the curvature of this 1-form: $F_A = dA + A\wedge A$. Since $d^2 = 0$, $A\wedge A = 0$, we need only to compute $dA$.
+\begin{align*}
+dA = d\left(-n\frac{\bar z\,dz}{1+|z|^2}\right) 
+&= -n\left(\frac{(1+|z|^2)d\bar z - \bar z(zd\bar z + \bar z dz)}{(1+|z|^2)^2}\right)\wedge dz\\
+&= -n\frac{d\bar z \wedge dz}{(1+|z|^2)^2} \qquad d\bar z \\
+&= dx - i\,dy,\quad dz = dx+i\,dy\\
+&= -2ni\frac{dx\wedge dy}{(1+x^2+y^2)^2}
+\end{align*}
+
+
+Thus $F_A = -2ni\dfrac{dx\wedge dy}{(1+x^2+y^2)^2}$.
+
+Using the formula for the Chern classes from Chern-Weil theory, we can compute the first Chern class; note that this is the expression of $c_1$ on the $z$-chart.
+
+
+\[
+\Rightarrow c_1 = \frac{-1}{2\pi i}\left(-2ni\frac{dx\wedge dy}{(1+x^2+y^2)^2}\right) = \frac{n}{\pi}\frac{dx\wedge dy}{(1+x^2+y^2)^2}
+\]
+
+Integrating over $\CP^1$, we get that 
+\begin{align*}
+\int_{\CP^1} c_1 &= \frac{n}{\pi}\left(\int_{\RR^2} \frac{dx\wedge dy}{(1+x^2+y^2)^2}\right) \\
+&= \frac{n}{\pi}\int_{0}^{2\pi} \int_{0}^{\infty} \frac{r}{(1+r^2)^2} \, dr \, d\theta \\
+&= \frac{n}{\pi} \int_{0}^{2\pi} \frac{1}{2} \, d\theta \\
+&= n
+\end{align*}
+
+The previous computation leaves us with some questions.
+\begin{enumerate}
+	\item If the final integral was taken over $\RR^2$, where did $\CP^1$ come in to play? Why can't we choose another $A$ defined only on $\RR^2$?
+	\item In this example,
+	\[
+	\int_{\CP^1} c_1 = \int_{\CP^2} F_A = \int_{\CP^2} dA = \int_{\text{large disk}} dA = \int_{\text{large } S^1} A.
+	\]
+	Could we instead choose $A$ to be compactly supported, so $\int = 0$? Or even choose $A=0$?
+\end{enumerate}
+
+The answer to both is a resounding no. The point here is that not every choice of $A$ defines a connection on a $U(1)$ bundle over $\CP^1$. In this example, even though $A$ is integrated over $\RR^2$, we already checked that it extends, so the fact that $A$ is defined globally comes first. $A$ ``knows'' what bundle it lives on by ``remembering'' the singular behavior at $z=\infty$, since it must match the $\frac{n\,dw}{w}$ term to allow for cancellation.
+
+If $A=0$ or is compactly supported, $\dfrac{dw}{w(1+|w|^2)} = 0$, so $n\frac{dw}{w(1+|w|^2)} - n\frac{dw}{w} = -n\frac{dw}{w}$.
+For this term to be nonsingular, $n$ must be $0$, so the line bundle must be trivial. The upshot here is that the curvature integral determines the bundle via the behaviour near $\infty$.
+
+\bigskip
+\subsection*{A Review of Hodge Thery}
+Let $(M,g)$ be an oriented Riemannian manifold. Recall that on each tangent space $T_pM$, we get an inner product pairing $\langle \cdot,\cdot\rangle_p$ which smoothly varies as $p$ varies in $M$.
+This gives an inner product on each cotangent space $T_p^\ast M$ which then induces an inner product on $\Lambda^k T^\ast M$ for each $k$ as follows. Let $\{e_1,\ldots,e_n\}$ be an oriented orthonormal basis of $T_pM$. Dualizing, we get a basis $\{e_1^\ast,\ldots,e_n^\ast\}$ of $T_p^\ast M$ which we may declare to be oriented and orthonormal; this declaration induces the inner product structure. For each fixed $k$, $\Lambda^k T^\ast M$ is $\binom{n}{k}$-dimensional. 
+For each choice of $k$ numbers between $1$ and $n$, $\{i_1,\ldots,i_k\}\subset\{1,\ldots,n\}$, we get a basis vector of the form $e_{i_1}^\ast \wedge \cdots \wedge e_{i_k}^\ast$. Again, we declare this basis to be oriented and orthonormal, which induces the inner product structure on $\Lambda^k T^\ast M$.
+Of course, one must check that the resulting inner product doesn't depend on the original choice of oriented orthonormal basis for $T_pM$.
+
+By abuse of notation, all of these inner products will be denoted by $\langle-,-\rangle$.
+
+Now, let $n = \dim M$. On each $\Lambda^n T_p^\ast M$, there exists a unique oriented $n$-wedge with norm $1$ via the above identification. This $n$-wedge is the volume form $e_1^\ast \wedge \cdots \wedge e_n^\ast =: d\mathrm{vol}_g$.
+Also that since $\Lambda^k T^\ast M$ has $\binom{n}{k}$ basis vectors, $\dim(\Lambda^k T^\ast M) = \dim(\Lambda^{n-k}T^\ast M)$; this is also true for differential forms. To exploit this symmetry, we may define the Hodge star.
+
+\begin{definition}
+The Hodge star is a map $\star : \Omega^k \to \Omega^{n-k}$ defined pointwise by (after fixing an orthonormal oriented basis $\{e_1,\ldots,e_n\}$ of $T_pM$): for each $I \subset \{1,\ldots,n\}$ with $|I|=k$, define $e_I^\ast := e_{i_1}^\ast \wedge \cdots \wedge e_{i_k}^\ast$.
+
+For each basis vector $e_I^\ast$, the Hodge star sends $e_I^\ast$ to $\star e_I^\ast$ via
+\[
+\star e_I^\ast := \pm \underbrace{e_{j_1}^\ast \wedge \cdots \wedge e_{j_{n-k}}^\ast}_{e_J^\ast} \quad \text{where } J = \{1,\ldots,n\}\setminus I.
+\]
+The $\pm$ sign is chosen such that $e_I^\ast \wedge e_J^\ast = e_1^\ast \wedge \cdots \wedge e_n^\ast$, so $\star$ gives the complementary wedge of forms. To define $\star$ on non-basis vectors, we extend linearly.
+\end{definition}
+
+Note that this definition is independent of the choice of orthonormal basis, but it does depend on the choice of metric. Furthermore, $\star$ is almost an involution\ldots but not quite. To illustrate this behavior, consider $e_I = e_1\wedge e_3$ and $e_J = -e_2 \wedge e_4$.
+Then 
+\begin{align*}
+e_I \wedge e_J &= e_1\wedge e_3 \wedge -e_2\wedge e_4 \\
+&= e_1\wedge e_2\wedge e_3\wedge e_4 \\
+&= d\mathrm{vol}_g
+\end{align*}
+so $\star(e_I)=e_J$. 
+Similarly, 
+\begin{align*}
+e_J\wedge e_I &=-e_2\wedge e_4\wedge e_1\wedge e_3\\
+&=-e_2\wedge -e_1\wedge e_4\wedge e_3\\
+&=e_1\wedge -e_2\wedge e_4\wedge e_3 \\
+&=e_1\wedge -e_2\wedge -e_3\wedge e_4\\
+&=e_1\wedge e_2\wedge e_3\wedge e_4 \\
+&= d\mathrm{vol}_g
+\end{align*}
+Thus $\star(e_J)=e_I$, so in this case, $\star^2(e_I)=e_I$. However, this is a direct result of the number of swaps we had to perform to correctly order the basis vectors. In general, the total number of swaps depends on $n$ and $k$: $(\star)^2 = (-1)^{k(n-k)}$. 
+
+Defining the Hodge star buys us two things. First, we can get an inner product structure on $\Omega^k$ from that on $\Lambda^k T^\ast M$, which was induced by the metric.
+
+\begin{definition}
+For $\alpha,\beta \in \Omega^k$, define
+\[
+\langle \alpha,\beta\rangle := \int_M \alpha \wedge \star\beta \qquad (\text{since } \alpha\wedge\star\beta \text{is an n-form.})
+\]
+If $\alpha$ is an orthonormal basis element, $\alpha\wedge\star\alpha = d\mathrm{vol}_g$, so
+\[
+\langle \alpha,\alpha\rangle = \int_M |\alpha|^2\, d\mathrm{vol}_g.
+\]
+\end{definition}
+
+Second, we get a formal adjoint of the exterior derivative. Recall that the exterior derivative is a map $d : \Omega^k \to \Omega^{k+1}$.
+A formal adjoint of $d$ then must be a map $d^\ast : \Omega^k \to \Omega^{k-1}$.
+
+\begin{definition}
+The ``codifferential'' $d^\ast : \Omega^k \to \Omega^{k-1}$ is defined as the composition $d^\ast := (-1)^k \star d \star$:
+\[
+d^\ast : \Omega^k \xrightarrow{\star} \Omega^{n-k} \xrightarrow{d} \Omega^{n-k+1} \xrightarrow{\star} \Omega^{k-1}.
+\]
+Furthermore, $(d^\ast)^2 = 0$.
+\end{definition}
+
+\begin{lemma}
+$d^\ast$ is the formal adjoint of $d$: $\langle d\alpha,\beta\rangle = \langle \alpha,d^\ast\beta\rangle$.
+\end{lemma}
+
+\begin{proof}
+By Stokes' theorem and the product rule,
+\[
+0 = \int_M d(\alpha\wedge\star\beta) = \int_M d\alpha\wedge\star\beta \pm \int_M \alpha\wedge d(\star\beta)
+\]
+\[
+= \langle d\alpha,\beta\rangle \pm \int_M \alpha \wedge \star d^\ast \beta = \langle d\alpha,\beta\rangle \pm \langle \alpha,d^\ast\beta\rangle
+\]
+\[
+\Rightarrow \langle d\alpha,\beta\rangle = \mp \langle \alpha,d^\ast\beta\rangle \qedhere
+\]
+\end{proof}
+
+We now have the tools to discuss the main point of Hodge theory (for our purposes).
+
+\begin{definition}
+The Hodge Laplacian is a map $\Delta : \Omega^k \to \Omega^k$ defined as
+\[
+\Delta = (d+d^\ast)^2 = dd^\ast + d^\ast d.
+\]
+$k$-forms $\alpha \in \Omega^k$ are called harmonic if they are in the kernel of the Hodge Laplacian, eg, $\Delta\alpha = 0$.
+
+\end{definition}
+
+
+\begin{lemma}
+$\alpha$ is harmonic iff $d\alpha = 0$ (closed) and $d^\ast\alpha = 0$ (co-closed).
+\end{lemma}
+
+\begin{proof}
+\leavevmode
+\begin{enumerate}
+\item[($\Leftarrow$)]This obvious by the definition.
+\item[($\Rightarrow$)] If $\Delta\alpha=0$, $\langle\Delta\alpha,\alpha\rangle = 0$. Since $\Delta\alpha = dd^\ast\alpha + d^\ast d\alpha$,
+\[
+0 = \langle \Delta\alpha,\alpha\rangle = \langle dd^\ast\alpha + d^\ast d\alpha,\alpha\rangle = \langle dd^\ast\alpha,\alpha\rangle + \langle d^\ast d\alpha,\alpha\rangle
+\]
+\[
+= \langle d^\ast\alpha,d^\ast\alpha\rangle + \langle d\alpha,d\alpha\rangle = \langle (d+d^\ast)\alpha,(d+d^\ast)\alpha\rangle
+\]
+\[
+\Rightarrow (d+d^\ast)\alpha = 0 \Rightarrow d\alpha = d^\ast\alpha = 0. \qedhere
+\]
+\end{enumerate}
+\end{proof}
+If $\alpha$ is harmonic, it is closed, so $\alpha$ defines a cohomology class $[\alpha]\in H^k_{dR}$.
+Furthermore, in local coordinates, $d^\ast d + dd^\ast$ is a 2nd order differential operator, since it acts like a 2nd derivative on the coefficients of basis vectors.
+We can interpret harmonicity in this context as cohomology classes which are norm minimizing. This gives the following lemma.
+
+
+\begin{lemma}
+$\alpha$ is harmonic iff $\alpha$ minimizes norm in its de Rham cohomology class.
+\end{lemma}
+
+\begin{proof} 
+	\begin{enumerate}
+		\item [($\Rightarrow$)]Let $\alpha \in H^k_{dR}(M;\RR)$. Every other element in this class will differ from $\alpha$ by an exact form, i.e., some $d\beta$ for some $\beta\in\Omega^{k-1}$. We will compute the norm of $\alpha+d\beta$.
+\[
+\langle \alpha+d\beta,\alpha+d\beta\rangle = \langle \alpha,\alpha\rangle + \langle d\beta,d\beta\rangle + 2\langle \alpha,d\beta\rangle
+\]
+We know that $\langle d\beta,d\beta\rangle \geq 0$, and $\langle \alpha,d\beta\rangle = \langle d^\ast\alpha,\beta\rangle = 0$ since $\alpha$ is harmonic.
+
+Thus $\langle \alpha,\alpha\rangle \leq \langle \alpha+d\beta,\alpha+d\beta\rangle$.
+\item[($\Leftarrow$)]
+Assume $\alpha$ is norm minimizing. For all $\beta\in\Omega^{k-1}$, consider the ray $\langle \alpha+t\,d\beta,\alpha+t\,d\beta\rangle_{t\in[0,1]}$. I.e., we move $\alpha$ around in its cohomology class along some ray. Since $\alpha$ is norm minimizing, when $t=0$, the derivative vanishes.
+\[
+0 = \left.\frac{d}{dt}\right|_{t=0}\langle \alpha+t\,d\beta,\alpha+t\,d\beta\rangle = 2\langle \alpha,d\beta\rangle = 2\langle d^\ast\alpha,\beta\rangle
+\]
+\[
+\Rightarrow d^\ast\alpha = 0
+\]
+\end{enumerate}
+It remains to show $d\alpha=0$ and that this minimizer is unique; the proof is left as an exercise. \qedhere
+\end{proof}
+
+\begin{theorem}[Hodge Theorem]
+Define $\mc{H}^k$ to be the space of harmonic $k$-forms. There exists an isomorphism $\mc{H}^k \cong H^k_{dR}$ sending $\alpha \in H^k_{dR}$ to the norm minimizer in $[\alpha]$.
+\end{theorem}
+
+\end{document}

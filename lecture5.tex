@@ -1,0 +1,316 @@
+\documentclass[main]{subfiles}
+\begin{document}
+
+\section*{Lecture 5 // Sept 8 // Yang Mills Functional \& Equations}
+\addcontentsline{toc}{section}{Lecture 5 -- Yang Mills Functional \& Equations}
+
+\begin{recall}
+We defined the following objects: $(M^4,g)$, $E$ an $\SU(2)$ bundle over $M$.
+\[
+\mc{A} := \text{space of } \SU(2) \text{ connections } \{\nabla=d+A\}, \text{ this is an affine space over } \Gamma(T^\ast M\otimes \ad E).
+\]
+\[
+\mc{G} = \SU(2) \text{ gauge group} = \Gamma(\Aut E), \qquad g\curvearrowright A, \qquad A\mapsto g^{-1}Ag+g^{-1}dg.
+\]
+$\mc{M} = $ Moduli space of Yang Mills connections with self dual curvature, i.e.,
+\[
+\mc{M} = \left\{\SU(2) \text{ connections } \nabla=d+A \text{ such that } F_A=\star F_A \ (\text{self dual})\right\}/\mc{G}.
+\]
+
+This condition of having self-dual curvature is actually a specific instance of a larger phenomena, which we'll discuss today to put A(SD) connections in context.
+\end{recall}
+
+\subsection*{The Yang Mills Functional}
+
+Recall that the Lie algebra of $\SU(2)$, $\mf{su}(2)$, is defined as the subset of $2\times 2$ complex matrices which are trace-free and skew-hermitian.
+\[
+\mf{su}(2) = \left\{\begin{pmatrix} ix & -y+iz \\ y+iz & -ix\end{pmatrix} \ \middle|\ (x,y,z)\in\RR^3\right\}
+\]
+
+In particular, this definition clearly shows that $\SU(2)$ is in bijection with $\RR^3$. $\mf{su}(2)$ can be endowed with an inner product given by $\langle A,B\rangle = \tr(AB^\dagger) = -\tr(AB)$, which is the same inner product as the one on $\RR^3$ (the dot product).
+\[
+\left\langle \begin{pmatrix} ix & -y+iz \\ y+iz & -ix\end{pmatrix}, \begin{pmatrix} ip & -q+ir \\ q+ir & -ip\end{pmatrix}\right\rangle = 2(xp+yq+zr) = 2\begin{pmatrix}x\\y\\z\end{pmatrix}\cdot\begin{pmatrix}p\\q\\r\end{pmatrix}
+\]
+
+This inner product on $\mf{su}(2)$ can be extended to an $L^2$ inner product on $\Omega^i(\ad E) = \Gamma(\Lambda^i T^\ast M\otimes \ad E)$. Given two sections $F$ and $G$, their inner product is defined as
+\[
+\langle F,G\rangle_{L^2} = -\int_M \tr(F\wedge\star G)
+\]
+where the inner product and trace is taken pointwise for each $p\in M$, giving a $4$-form at each point, i.e., a function of $p$ which we can integrate over $M$. By taking $G=F$, the norm of $F$ is thus $\|F\|^2 = \langle F,F\rangle_{L^2}$.
+
+Using this inner product, we may now define the Yang-Mills Functional.
+
+\begin{definition}[Yang-Mills Functional]
+\[
+\YM : \{\SU(2)\text{-connections}\} \to \RR
+\]
+\[
+\nabla \longmapsto \YM(\nabla) := \langle F_A,F_A\rangle_{L^2} = -\int_M \tr(F_A\wedge\star F_A) = -\int_M \|F_A\|^2\, d\mathrm{vol}_M
+\]
+\end{definition}
+
+Heuristically, $\YM(\nabla)$ measures the ``strength'' of curvature of $\nabla$. For some connection, what does it mean to be a critical point of the Yang-Mills functional? Recall that the space of connections is affine over $\Gamma(T^\ast M\otimes \ad E)$. A fixed connection $\nabla$ is a critical point of $\YM$ if every nearby connection $\nabla'$ has larger or smaller curvature. Any such $\nabla'$ can be written as $\nabla' = \nabla+tB$, i.e., a small perturbation of $\nabla$ by some section $B\in\Gamma(T^\ast M\otimes \ad E)$.
+
+In terms of $F_A$, the curvature of $\nabla'$ becomes
+\[
+F_{A+tB} = d(A+tB)+(A+tB)\wedge(A+tB) = F_A + t(dB+A\wedge B+B\wedge A) + t^2 B\wedge B.
+\]
+Define $D_A B := dB+A\wedge B+B\wedge A$.
+
+The derivative $\left.\dfrac{d}{dt}\right|_{t=0} \YM(\nabla+tB)$ then becomes
+\[
+\left.\frac{d}{dt}\right|_{t=0} \YM(\nabla+tB) = \left.\frac{d}{dt}\right|_{t=0} \langle F_{A+tB}, F_{A+tB}\rangle
+\]
+\[
+= \left.\frac{d}{dt}\right|_{t=0} \langle F_A+tD_AB+t^2B\wedge B,\ F_A+tD_AB+t^2B\wedge B\rangle
+\]
+\[
+= 2\langle D_AB, F_A\rangle.
+\]
+
+Therefore $\nabla$ is a critical point of $\YM$ iff this pairing is $0$ for all $B$.
+
+Before we continue, we should discuss the appearance of $D_AB$.
+
+\subsection*{Interlude: More about connections \& bundles}
+
+Recall the usual deRham complex,
+\[
+\Omega^0 \xrightarrow{d} \Omega^1 \xrightarrow{d} \Omega^2 \xrightarrow{d} \cdots
+\]
+Now, take a vector bundle $E\to B$ and a fixed connection $\nabla$ on $E$. We have already described $\nabla$ as a map $\nabla : \Gamma(E) \to \Gamma(T^\ast M\otimes E)$. Can we get an analogous complex to the deRham complex?
+
+To do so, we must generalize the spaces \& the maps. Recall that the $\Omega^i$ in the deRham complex are defined to be sections of the bundle $\Lambda^i T^\ast E \to M$.
+
+\begin{definition}
+$E$-valued $i$-forms are sections of the bundle $\Lambda^i T^\ast M\otimes E$:
+\[
+\Omega^i(E) = \Gamma(\Lambda^i T^\ast M \otimes E).
+\]
+\end{definition}
+
+Note that when $i=0$, we recover $\Omega^0(E) = \Gamma(\Lambda^0 T^\ast M\otimes E) = \Gamma(E)$, and when $i=1$, we get $\Omega^1(E) = \Gamma(\Lambda^1 T^\ast M\otimes E)$. So as defined above, a connection gives a map $\nabla : \Omega^0(E) \to \Omega^1(E)$. We extend the definition of $\nabla$ using the Leibniz rule, as follows.
+
+\begin{definition}
+\[
+\nabla : \Omega^i(E) \to \Omega^{i+1}(E)
+\]
+\[
+\nabla(\alpha\otimes s) = d\alpha\otimes s + (-1)^i \alpha\wedge\nabla s
+\]
+where $\alpha$ is an $i$-form and $s$ a section of $E$, so $(\alpha\otimes s)\in\Omega^i(E)$.
+\end{definition}
+
+Note that unlike in the deRham complex, $\nabla^2\neq 0$. However, measuring the failure of this fact is very useful.
+
+\begin{lemma}
+$\nabla^2(s) = F_A s$.
+\end{lemma}
+
+\begin{proof}
+Choose basis sections $\{e_1,\ldots,e_n\}$ by choosing a trivialization of the bundle. Then $s = \sum s_i e_i$, where $s_i$ are functions.
+
+Recall $\nabla = d+A$. Therefore
+\[
+\nabla^2 s = \nabla(\nabla s) = \nabla\left(\sum_{i,j} ds_i\otimes e_i + s_iA_{ji}e_j\right) \quad (\text{Einstein but we have a single sum here})
+\]
+\[
+= \underbrace{-ds_i\wedge(s_iA_{ji}e_i)}_{\nabla \text{ of 1st term}} + \underbrace{\nabla(s_iA_{ji})e_j\wedge ds_ie_i}_{\nabla \text{ of 2nd term}}
+\]
+\[
+= \underbrace{-ds_i\wedge(s_iA_{ji}e_i)}_{\nabla \text{ of 1st term}} + \big(ds_i\wedge A_{ji}+s_idA_{ji}\big)e_j - (s_iA_{ji})\wedge(A_{kj}e_k)
+\]
+\[
+= s_i\,dA_{ji}e_j + s_iA_{j\ell}A_{\ell i}e_j
+\]
+\[
+= dA + A\wedge A. \qedhere
+\]
+\end{proof}
+
+The upshot here is that curvature is the obstruction for the differential on the $\Omega^i(E)$ complex to square to $0$.
+
+We'll now consider the bundle $\End(E)$. Given a connection $\nabla=d+A$ on $E$, we can define a connection on $\End(E)$ using $\nabla$. We do so locally.
+
+\begin{definition}
+A connection $D_A$ on $\End(E)$ is locally of the form
+\[
+D_AB := dB + AB - BA
+\]
+where $A$ is a matrix of $1$-forms and $B$ is a section of $\End(E)$, i.e., a matrix valued function.
+\end{definition}
+
+This definition can be motivated in two ways. First, connections on $E$ are identified with matrices, which act on vectors by multiplication and other matrices via the Lie bracket. The $dB$ term is the vector part, i.e., the usual entry-wise derivative, and the $AB-BA$ term records the linear action of $A$ on $B$.
+
+The second way to motivate this is by decomposing $\End(E)$ as $\End(E) = E\otimes E^\ast$, and checking that tensoring $\nabla$ with the connection on $E^\ast$ obtained by dualizing gives the same thing.
+
+Now that we have a connection on $\End(E)$, we again get a map $D_A : \Omega^0(\End E) \to \Omega^1(\End E)$, which we can also extend to a map $D_A : \Omega^i(\End E) \to \Omega^{i+1}(\End E)$.
+
+\begin{exercise}
+Use the Leibniz rule to extend $D_A$ to a map $D_A : \Omega^i(\End E) \to \Omega^{i+1}(\End E)$.
+\end{exercise}
+
+Further, if $A$ is a $\SU(2)$ connection, $B$ is $\mf{su}(2)$-valued, so $[A,B]$ is also $\mf{su}(2)$-valued. Therefore we can restrict $\End(E)$ to $\ad(E)$ and set the complex
+\[
+\Omega^0(\ad E) \xrightarrow{D_A} \Omega^1(\ad E) \to \cdots \qquad \textcolor{red}{(\ast)}
+\]
+
+\begin{lemma}
+For $B\in\Omega^1(\ad E)$, $D_AB$ as defined above is the $D_AB$ defined.
+\textcolor{red}{\fbox{!! Sign issue?}}
+\end{lemma}
+
+\begin{proof}
+First, any $B\in\Omega^1(\ad E)$ can be expressed as a linear combination of $1$-forms $\omega$ with coefficients constant $\mf{su}(2)$ matrices $C$. Thus we can assume $B=\omega C$.
+
+Then $D_AB = D_A(\omega C)$
+\[
+\underset{\substack{\text{Leibniz}\\\text{and }\omega \text{ is a 1-form}}}{=} d\omega\, C - \omega\wedge\nabla C
+\]
+\[
+\underset{\text{(since } C \text{ const)}}{=} d\omega\, C - \omega\wedge(dC+AC-CA)
+\]
+\[
+\underset{\substack{\text{(since }\omega,A \text{ both}\\ \text{1-forms,}\\ \omega\wedge A = -A\wedge\omega\text{)}}}{=} d\omega\, C - \omega\wedge[A,C] = d\omega\, C - \underbrace{(\omega\wedge A)}_{}C + \omega C\wedge A
+\]
+\[
+= d\omega\, C - (-A\wedge\omega)C + \omega C\wedge A
+\]
+\[
+= d(\omega C) + A\wedge(\omega C) + (\omega C)\wedge A
+\]
+\[
+= dB + A\wedge B + B\wedge A. \qedhere
+\]
+\end{proof}
+
+Note that this proof, applied to $\omega=i$-form instead, shows in general that the map
+\[
+D_AB : \Omega^i(\End E) \to \Omega^{i+1}(\End E) \text{ is}
+\]
+\[
+D_AB = dB+A\wedge B - B\wedge A, \text{ for } i \text{ even,}
+\]
+\[
+\text{and } D_AB = dB+A\wedge B+B\wedge A, \text{ for } i \text{ odd.}
+\]
+
+Now, seemingly from nowhere, we'll define the Bianchi Identity -- this will be incredibly useful later.
+
+\begin{theorem}[Bianchi Identity]
+If $A$ is a fixed connection, $D_AF_A = 0$, $F_A\in\Omega^2(\ad(E))$.
+\end{theorem}
+
+\begin{proof}
+Since $F_A = dA+A\wedge A$,
+\[
+D_AF_A = dF_A + A\wedge F_A - F_A\wedge A
+\]
+\[
+= d(dA+A\wedge A) + A\wedge(dA+A\wedge A) - (dA+A\wedge A)\wedge A
+\]
+\[
+= \big(d^2A+d(A\wedge A)\big) + \big(A\wedge dA+A\wedge A\wedge A\big) - \big(dA\wedge A+A\wedge A\wedge A\big)
+\]
+\[
+= d^2A + d(A\wedge A) + A\wedge dA + A\wedge A\wedge A - dA\wedge A - A\wedge A\wedge A
+\]
+\[
+\underset{\substack{\text{(since } d^2A=0 \text{ and}\\ dA\wedge A = -A\wedge dA\text{)}}}{=} (dA\wedge A+A\wedge dA)+A\wedge dA - dA\wedge A \qquad \textcolor{orange}{\fbox{Sign issue?}}
+\]
+\[
+= d^2A+dA\wedge A+A\wedge dA+A\wedge dA+A\wedge A\wedge A - dA\wedge A - \textcolor{blue}{\underline{A\wedge A\wedge A}}
+\]
+\[
+= 0.
+\]
+\end{proof}
+
+Now, let $D_A^\ast := \star D_A \star$. This gives us a codifferential
+\[
+D_A^\ast : \Omega^2(\ad E) \to \Omega^1(\ad E).
+\]
+We are now ready to return to discussing the critical points of the Yang-Mills Functional.
+
+\subsection*{Yang-Mills Connections}
+
+We have seen that $A$ is a critical point of $\YM$ iff
+\[
+\langle D_AB, F_A\rangle_{L^2} = 0 \quad \text{for all } B\in\Omega^1(\ad E)
+\]
+\[
+\Leftrightarrow \langle B, D_A^\ast F_A\rangle_{L^2} = 0
+\]
+\[
+\Leftrightarrow D_A^\ast F_A = 0.
+\]
+
+\begin{definition}
+A connection such that $D_A^\ast F_A = 0$ is called a Yang-Mills connection. These connections are the critical points of the YM functional.
+\end{definition}
+
+Note the similarity with Hodge theory! Last week, we saw that the critical points of $L^2$ norm on forms are precisely the harmonic forms: $\alpha$ for which $d\alpha = d^\ast\alpha = 0$.
+
+If a connection $A$ is Yang-Mills, then $D_A^\ast F_A = 0$. And by the Bianchi identity, we always have that $D_AF_A=0$. Therefore YM connections can be thought of as harmonic forms; the slogan here is that ``YM theory is the $\SU(2)$ version of Hodge theory.''
+
+The one caveat is that in general, $D_A^\ast F_A$ is difficult to understand. In Hodge theory, $d$ always exists, but here, both $D_A^\ast$ and $F_A$ depend on $A$.
+
+It turns out that some YM connections satisfy a simpler condition, which also guarantees that they are global minima/maxima.
+
+\begin{lemma}
+\begin{enumerate}
+	\item If $A$ is SD or ASD, then $D_A^\ast F_A = 0$.
+	\item In fact, (A)SD are the global minima/maxima of the YM functional.
+\end{enumerate}
+\end{lemma}
+
+\begin{proof}
+\begin{enumerate}
+	\item This is immediate from Bianchi: since $D_AF_A=0$ and $D_A^\ast = \star D_A\star$, if $F_A = \pm\star F_A$, then
+	\[
+	D_A^\ast F_A = \star D_A\star F_A = \star D_A\,{\pm} F_A = \pm\star D_AF_A = 0.
+	\]
+	\item For $F_A\in\Omega^2(\ad E) = \Omega_+^2(\ad E)\oplus\Omega_-^2(\ad E)$, it splits as $F_A = F_A^+ + F_A^-$, where $\langle F_A^+,F_A^-\rangle_{L^2}=0$.
+
+	Thus
+	\[
+	\YM(\nabla) = \langle F_A,F_A\rangle_{L^2} = -\int_M \tr(F_A\wedge\star F_A)
+	\]
+	\[
+	= \langle F_A^++F_A^-,\ F_A^++F_A^-\rangle_{L^2}
+	\]
+	\[
+	= \langle F_A^+,F_A^+\rangle_{L^2} + \langle F_A^-,F_A^-\rangle_{L^2} + \langle F_A^+,F_A^-\rangle_{L^2} + \langle F_A^-,F_A^+\rangle_{L^2}
+	\]
+	\[
+	= \|F_A^+\|_{L^2}^2 + \|F_A^-\|_{L^2}^2.
+	\]
+
+	Now, recall the instanton number $k$ defined as
+	\[
+	k = -\langle c_2,[M]\rangle = \frac{-1}{8\pi^2}\int_M \tr(F_A\wedge F_A).
+	\]
+	Since $F_A = \star(\star F_A)$,
+	\[
+	k = \frac{1}{8\pi^2}\langle F_A,\star F_A\rangle_{L^2}
+	\]
+	\[
+	= \frac{1}{8\pi^2}\langle F_A^++F_A^-,\ \star(F_A^++F_A^-)\rangle_{L^2}
+	\]
+	\[
+	= \frac{1}{8\pi^2}\langle F_A^++F_A^-,\ F_A^+-F_A^-\rangle_{L^2}
+	\]
+	\[
+	= \frac{1}{8\pi^2}\Big(\langle F_A^+,F_A^+\rangle_{L^2} + \langle F_A^+,-F_A^-\rangle_{L^2} + \langle F_A^-,F_A^+\rangle_{L^2} + \langle F_A^-,-F_A^-\rangle_{L^2}\Big)
+	\]
+	\[
+	= \frac{1}{8\pi^2}\Big(\|F_A^+\|_{L^2}^2 - \|F_A^-\|_{L^2}^2\Big).
+	\]
+
+	Therefore $8\pi^2 k = \|F_A^+\|_{L^2}^2 - \|F_A^-\|_{L^2}^2$. Combining this with $\YM(\nabla) = \|F_A^+\|_{L^2}^2+\|F_A^-\|_{L^2}^2$, we see that
+
+	if $k>0$, then $\YM\geq 8\pi^2 k$, with equality when $F_A^-=0$, i.e., when $A$ is self-dual. On the other hand, if $k<0$, then $\YM\geq 8\pi^2(-k)$ and equality is realized when $F_A^+=0$, so $A$ is anti-self-dual. \qedhere
+\end{enumerate}
+\end{proof}
+
+\end{document}

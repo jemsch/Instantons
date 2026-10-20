@@ -1,0 +1,224 @@
+\documentclass[main]{subfiles}
+\begin{document}
+
+\section*{Lecture 4 // Sept 3 // ASD connections \& Gauge}
+\addcontentsline{toc}{section}{Lecture 4 -- ASD connections \& Gauge}
+
+\begin{recall}
+To prove Donaldson's theorem, we need to study the space of anti-self-dual connections on M modulo gauge. Last time, we defined connections and and discussed the codifferential and the Hodge-Laplacian, and stated the main theorem of Hodge theory.
+\begin{itemize}
+	\item $d^\ast = (-1)^k \star d \star$ 
+	\item $\Delta := (d+d^\ast)^2 = dd^\ast + d^\ast d$ 
+	\item $\Omega^k = \operatorname{im} d \oplus \operatorname{im} d^\ast \oplus \mc{H}^k$
+		where $\mc{H}^k := \ker d \cap \ker d^\ast$.
+\end{itemize}
+	Today, we'll discuss self duality.
+\end{recall}
+
+First, note that the statement of the Hodge decomposition given above isn't quite the same as from last time. It's not too difficult to verify that the decomposition $\Omega^k = \operatorname{im} d \oplus \operatorname{im} d^\ast \oplus \mc{H}^k$ are orthogonal, ie, have pairwise intersection \{0\}.
+However, it is harder to show that $\Omega^k = \operatorname{span}\{\mc{H}^k, \operatorname{im} d, \operatorname{im} d^\ast\}$. For this, you'll need some functional analysis, so we'll only verify the first part. 
+
+\begin{itemize}
+	\item If $\alpha\in\mc{H}^k\cap\operatorname{im} d$, $\Delta \alpha = 0$, so $	\langle \alpha,\alpha\rangle = \langle \alpha, d\beta\rangle = \langle d^\ast \alpha, \beta\rangle = 0$. 
+	\item if $\alpha \in \operatorname{im} d$ and $\alpha \in \operatorname{im} d^\ast$, so $	\langle \alpha,\alpha\rangle = \langle d\beta, d^\ast \gamma\rangle = \langle d^2\beta,\gamma\rangle = 0$.
+\end{itemize}
+
+Each cohomology class is in the kernel of $d$, and since $\ker(d) \cong \operatorname{im}(d) \oplus \mc{H}^k$, each class is in $\operatorname{im}(d) \oplus \mc{H}^k$. Therefore there can be only one harmonic representative. 
+In particular, the different cohomology classes are affine cosets of $\operatorname{im}(d)$.
+
+We'll now specialize to $(M^4,g)$ and let $k=2$. Since $n-k=2$, the Hodge star gives an involution $\star : \Omega^2 \to \Omega^2$ which squares to the identity: $\star^2 = (-1)^{2(4-2)} = +1$. This means we can look at the positive and negative eigenspaces of $\star$ on $\Omega^2$.
+
+\begin{definition}
+If $\star \alpha = \alpha$, $\alpha$ is called self-dual (SD). If $\star \alpha = -\alpha$, $\alpha$ is anti-self-dual (ASD). The subspace of self-dual 2-forms is denoted $\Omega_+^2$, and the subspace of anti-self-dual 2-forms is $\Omega_-^2$.
+\end{definition}
+
+After choosing an orthonormal basis for $T_p^\ast M = \operatorname{span}\{e_1^\ast, e_2^\ast, e_3^\ast, e_4^\ast\}$, we get that \[\Omega^2=\operatorname{span}\{e_1\wedge e_2, e_1\wedge e_3, e_1\wedge e_4, e_2\wedge e_3, e_2\wedge e_4, e_3\wedge e_4\}.\]
+To find the eigenspaces of $\star$, we'll compute $\star(e_i\wedge e_j$ for each basis element:
+\[
+\star(e_1\wedge e_2)=e_3\wedge e_4, \hfill ~~~~ \star(e_1\wedge e_3)=-e_2\wedge e_4, ~~~~ \hfill \star(e_1\wedge e_4)=e_2\wedge e_3,\]
+\[\star(e_2\wedge e_3)=e_1\wedge e_4,\hfill ~~~~ \star(e_2\wedge e_4)=-e_1\wedge e_3, ~~~~  \hfill \star(e_3\wedge e_4)=e_1\wedge e_2.\]
+
+
+
+Therefore \[\Omega_+^2=\operatorname{span}\{e_1\wedge e_2 + e_3\wedge e_4,\ e_1 \wedge e_3 - e_2\wedge e_4,\ e_1\wedge e_4 + e_2 \wedge e_3\}\]
+and \[\Omega_-^2=\operatorname{span}\{e_1\wedge e_2 - e_3\wedge e_4,\ e_1 \wedge e_3 + e_2\wedge e_4,\ e_1\wedge e_4 - e_2 \wedge e_3\},\]
+which splits the space of 2-forms as $\Omega^2 = \Omega_+^2 \oplus \Omega_-^2$
+
+
+Further, note that if $\alpha$ is self-dual, $\int_M \alpha \wedge \alpha = \int_M \alpha \wedge \star \alpha = \langle \alpha,\alpha\rangle = \|\alpha\|^2$.
+Similarly, if $\alpha$ is anti-self-dual, $\int_M \alpha \wedge \alpha = \int_M \alpha \wedge -\star\alpha = -\int_M \alpha\wedge\star\alpha = -\langle\alpha,\alpha\rangle = -\|\alpha\|^2$, 
+so self-dual 2-forms have positive self cup product, and anti-self-dual 2-forms have negative self cup product. 
+
+\subsection*{Classification of Bundles}
+
+Previously, we discussed vector bundless and connections on vector bundles. 
+The bundles $E \xrightarrow{p} B$ had transition functions $g \in \GL_n(\CC)$, and connections $\nabla = d+A$ were defined locally as matricies with entries given by 1-forms.
+Now, we'll specify to $\SU(2)$-connections.
+
+\begin{definition}[$G$-vector bundle]
+	Let $G$ be a Lie group; think of it very explicitly as a Lie subgroup of $\GL_n(\CC)$. Then the Lie algebra $\mf{g}$ is a subspace of $\Mat_n(\CC)$.
+We say that a vector bundle has structure group $G$ if the transition functions $g \in \GL_n(\CC)$ are valued in the subgroup $G \subset \GL_n(\CC)$: $g \in G \subseteq \GL_n(\CC)$-valued. A vector bundle with this property is called a $G$-vector bundle.
+\end{definition}
+\begin{definition}[$G$-connection]
+	Given a $G$-vector bundle, a $G$-connection on $E$ is a connection whose associated connection 1-form $A$ is valued in $T^\ast M \otimes \mf{g}$. 
+	This means that $A$ is again a matrix of 1-forms, but the matrix must lie in Lie algebra.
+	Even more concretely, given any tangent vector, we may feed it to $A$. This results in a matrix of numbers--a literal element of $\Mat_n(\CC)$--which is required to be in $\mf{g} \subseteq \Mat_n(\CC)$).
+
+\end{definition}
+
+
+\begin{exercise}
+Check that the definition of a $G$-connection is preserved by coordinate change
+\[
+A \mapsto g^{-1}Ag + g^{-1}dg \quad (\text{as long as } g \in G)
+\]
+e.g., if $A \in \mf{g}$, $g^{-1}Ag + g^{-1}dg \in \mf{g}$:
+\begin{itemize}
+	\item[$\hookrightarrow$] $\mf{g}$ closed under conjugation with $g \in G$
+	\item[$\hookrightarrow$] $dg$ in $T_e G \rightsquigarrow$ must move to $e$ before evaluating, so precompose with $g^{-1}$
+\end{itemize}
+\end{exercise}
+
+\begin{exercise}
+If $\nabla = d+A$ is a $G$-connection, $F_A = dA + A\wedge A \in \Lambda^2 T^\ast M \otimes \mf{g}$ at each point, i.e., for any $v,w$, feed in $v,w$ to 2-form entries in matrix, get a matrix in $\mf{g} \in \Mat_n(\CC)$.
+\end{exercise}
+
+$F_A$ can equivalently be written as
+\[
+F_A \in \Gamma\big(\Lambda^2 T^\ast M \otimes \underbrace{\ad(E)}_{\text{adjoint bundle}}\big)
+\]
+
+Before, $F_A \in \Gamma(\Lambda^2 T^\ast M \otimes \End(E))$. $\ad(E) \subset \End(E)$ is the subbundle of $\End(E)$ with all transition functions in $\mf{g}$; $\mf{g}$ is closed under conjugation, so transition functions on $\End(E)$ restrict to those on $\ad(E)$.
+
+We write $\Omega^2(\ad E) := \Gamma(\Lambda^2 T^\ast M \otimes \ad(E))$.
+
+In our setting, there will be 2 $G$'s which are relevant:
+
+\medskip\noindent\textcircled{1} $G = \mathrm{U}(1) = $ complex line bundles $\subset \GL_1(\CC)$
+\begin{itemize}
+	\item[] so $g$ is $S^1$ valued
+	\item[] so tangent space at 1 in $\mathrm{U}(1)$ is imaginary axis $\Rightarrow A \in i\,\Omega^1(M;\RR)$
+\end{itemize}
+
+\medskip\noindent\textcircled{2} $G = \SU(2) \subseteq \GL_2(\CC)$
+\begin{itemize}
+	\item[] so $g$ looks like $\begin{pmatrix} a & -\bar b \\ b & \bar a\end{pmatrix}$, $|a|^2+|b|^2=1$
+	\item[] so $A$ is locally in $\begin{pmatrix}\alpha & -\bar\beta \\ \beta & -\alpha\end{pmatrix}$, $\alpha$ is purely imaginary 1-form
+	\item[] $\mf{su}(2) = $ trace-free skew-hermitian matrices.
+\end{itemize}
+
+How to classify these $G$-bundles?
+
+\textbf{Recall Chern--Weil:} For $\mathrm{U}(1)$ bundles, only 1 chern class $c_1$.
+
+\begin{theorem}
+$c_1 \in H^2(M;\ZZ)$ classifies $\mathrm{U}(1)$ bundles $/M$.
+\end{theorem}
+
+For $\SU(2)$, have $c_1$ and $c_2$. If $F_A$ is $2\times 2$, check that:
+\[
+c_1 = \frac{-1}{2\pi i}\tr(F_A) \quad (\text{coeff.\ of } t) \ \rightsquigarrow \text{ in } \det\!\left(I - \tfrac{t}{2\pi i}F_A\right)
+\]
+\[
+c_2 = \frac{-1}{4\pi^2}\det(F_A) \quad (\text{coeff.\ of } t^2)
+\]
+
+Specifically, for an $\SU(2)$ connection, we know that
+\[
+c_1 = \frac{-1}{2\pi i}(\alpha + -\alpha) = 0
+\]
+\[
+c_2 = \frac{-1}{4\pi^2}\left(\alpha\wedge -\alpha - \beta \wedge -\bar\beta\right)
+\]
+
+For an $\SU(2)$ bundle, also have that
+\[
+c_2 = \frac{1}{8\pi^2}\Tr(F_A \wedge F_A)
+\]
+\[
+\left(F_A \wedge F_A = \begin{pmatrix}\alpha & -\bar\beta\\ \beta & -\alpha\end{pmatrix}\wedge\begin{pmatrix}\alpha & -\bar\beta\\ \beta & -\alpha\end{pmatrix} = \begin{pmatrix}\alpha\wedge\alpha - \bar\beta\wedge\beta & \ast \\ \ast & -\beta\wedge\bar\beta+\alpha\wedge\alpha\end{pmatrix}\right)
+\]
+
+\begin{theorem}
+$\SU(2)$ bundles over $M^4$ are classified by $c_2$.
+
+\textcolor{red}{Not true in general: $\pi_k(B\SU(2)) \neq 1\ \forall\ k>4$.}
+\end{theorem}
+
+In particular, a (closed oriented) 4-manifold has $\ZZ$-many $\SU(2)$ bundles, since $c_2 \in H^4(M;\ZZ)\cong \ZZ$.
+
+\begin{definition}
+Given an $\SU(2)$ bundle, the ``instanton number'' = ``$2^{\text{nd}}$ chern number'' of $E$ is
+\[
+k = -\int_M c_2 \quad \left(=-\langle [M],c_2\rangle\text{, convention}\right)
+\]
+\end{definition}
+
+\subsection*{Splittings of Bundles}
+
+Let $E$ be an $\SU(2)$ bundle. When does $E$ split as $E=L_1\oplus L_2$?, $L_i = \mathrm{U}(1)$ bundle, transition functions $h$ split as $h = \begin{pmatrix}h_{11}&0\\0&h_{22}\end{pmatrix}$.
+
+If $E$ splits, it's called a split bundle, $L_1\oplus L_2$ is a ``splitting.'' If $E$ is split, a split connection is locally of the form $A = \begin{pmatrix}\alpha_1 & 0\\ 0 & \alpha_2\end{pmatrix}$.
+
+If $E$ is an $\SU(2)$ bundle, any splitting into $\mathrm{U}(1)$ bundles must be of the form $L\oplus \bar L$, since $\alpha_1 = -\alpha_2$
+\[
+\Rightarrow \text{a split } \SU(2) \text{ connection looks like } A = \begin{pmatrix}\alpha & 0\\0&-\alpha\end{pmatrix}
+\]
+
+\begin{question}
+If $E$ splits, how many splittings?
+\end{question}
+
+If $E$ splits, $F_A = \begin{pmatrix}d\alpha & 0\\0&-d\alpha\end{pmatrix}$ since $A\wedge A = 0$.
+
+\[
+\Rightarrow \text{if } E \text{ splits as } L\oplus\bar L,\quad c_2(E) = c_1(L)\cup c_1(\bar L) = c_1(L)\cup -c_1(L)
+\]
+\[
+\Rightarrow \text{if } E \text{ splits, determined by 1 line bundle, which is determined by one } H^2 \text{ class}
+\]
+\[
+\Rightarrow k = -\langle c_2,[M]\rangle = -\langle c_1\cup -c_1, [M]\rangle = \langle c_1\cup c_1, [M]\rangle
+\]
+
+\begin{lemma}
+Let $E$ be an $\SU(2)$ bundle with instanton \# $k$ over $M^4$. Then $E$ splits iff there exists $\alpha \in H^2(M,\ZZ)$ such that $\int_M \alpha^2 = k$, and the \# splittings $= \tfrac12 \#$ such $\alpha$ (if $H^2$ torsion free).
+\end{lemma}
+
+\textbf{The Punchline:}
+
+\begin{definition}
+Let $(M^4,g)$ be a Riemannian 4-manifold and $E$ be an $\SU(2)$ bundle over $M$ (will usually consider $k=1$).
+\[
+\mc{A} := \{\SU(2) \text{ connections on } E\}
+\]
+this is an $\infty$-dimensional affine space over $\Gamma(T^\ast M\otimes \ad E)$.
+\[
+\mc{G} := \{\SU(2)\text{ gauge group}\} = \Gamma(\Aut(E))
+\]
+section in $\End(E)$ valued in $\ad(E)$ (locally).
+\end{definition}
+
+The gauge group acts on the space of connections: $\mc{G} \curvearrowright \mc{A}$ by
+\[
+g\curvearrowright A = g^{-1}Ag+g^{-1}dg
+\]
+
+$\mc{G}$ is similar to $[M,\SU(2)]$. It's not quite; this is only true if $E$ is trivial.
+
+\begin{definition}
+A connection $\nabla = d+A$ is self-dual if $F_A = \star F_A$, anti-self-dual if $F_A = -\star F_A$
+
+(extend $\star$ to act on $\Gamma(\Lambda^2 T^\ast M \otimes \ad(E))$ by acting on just the 2-forms part; e.g., $\star$ of every entry of matrix.)
+\end{definition}
+
+(Really, should say ``connection with self-dual curvature.'') Check: property of being self dual is preserved by gauge transformations: $F_A \mapsto g^{-1}F_A g$, $\star$ commutes with conjugation. E.g., the property of being SD is invariant under $\mc{G}$.
+
+\begin{definition}
+The (A)SD Moduli Space is
+\[
+\mc{M} := \{(\text{anti})\text{-self-dual } \SU(2) \text{ connections}\}/\mc{G} \subset \mc{A}/\mc{G}
+\]
+\end{definition}
+
+\end{document}
