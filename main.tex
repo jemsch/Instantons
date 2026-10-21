@@ -20,12 +20,32 @@
 \DeclareMathOperator{\Maps}{Maps}
 \newcommand{\HP}{\mathbb{HP}}
 
+\titleformat{\part}[hang]{\normalfont\Large\bfseries}{\partname\ \thepart:}{0.5em}{}
+
+\makeatletter
+\@addtoreset{theorem}{part}
+\makeatother
+\renewcommand{\thetheorem}{\arabic{part}.\arabic{theorem}}
+\renewcommand{\thelemma}{\thetheorem}
+\renewcommand{\theproposition}{\thetheorem}
+\renewcommand{\thecorollary}{\thetheorem}
+\renewcommand{\theconjecture}{\thetheorem}
+\renewcommand{\thedefinition}{\thetheorem}
+\renewcommand{\theexample}{\thetheorem}
+\renewcommand{\thefact}{\thetheorem}
+\renewcommand{\theproblem}{\thetheorem}
+\renewcommand{\theexercise}{\thetheorem}
+\renewcommand{\thequestion}{\thetheorem}
+\renewcommand{\theclaim}{\thetheorem}
+\renewcommand{\theremark}{\thetheorem}
+\renewcommand{\thenote}{\thetheorem}
+
 \begin{document}
 
 \begin{titlepage}
 \begin{center}
 \vspace*{2cm}
-{\LARGE\bfseries Instantons and Four-Manifolds\par}
+{\LARGE\bfseries Instantons and Three-Manifolds\par}
 \vspace{2em}
 {\large Lecture notes from the class of the same name taught by Irving Dai in Fall 2026, transcribed and expanded by Jemma Schroder\par}
 \vspace{1.5em}

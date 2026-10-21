@@ -7,9 +7,11 @@
 \begin{recall}
 We defined the $r_s$-invariant for $s\in[-\infty,0]$
 \[
-r_s(Y) = -\inf_{r<0}\left\{r \mid \exists\ \Theta\text{-supported } [r,-s] \text{ cycle}\right\}
+r_s(Y) = -\inf_{r<0}\left\{r \mid \text{there exists a } \Theta\text{-supported } [r,-s] \text{ cycle}\right\}
 \]
 which asks the question ``in which filtered subquotients do we have a cycle of the form $\Theta+\dots$''
+
+We showed that the $r_s$-invariant had the following properties:
 \begin{enumerate}
 \item $r_s$-invariant is a piecewise constant, non-increasing function.
 \item If there exists a negative-definite cobordism $W$ (with $H_1(W)=0$) from $Y_1$ to $Y_2$, then $r_s(Y_1)\leq r_s(Y_2)$. In particular, $r_s$ is a homology cobordism invariant: if $Y$ bounds a negative-definite $4$-manifold $W$ (with $H_1(W)=0$), then $r_s(Y) = \infty$.
@@ -28,7 +30,7 @@ Let $k\subseteq S^3$. Denote $Y_n = S^3_{1/n}(k)$, $n>0$.
 \end{theorem}
 
 \begin{remark}
-A-priori, it's not obvious that $\Theta^3_{\mathbb{Z}}$ is at all interesting. For many years after its definition, it was not known whether $\Theta^3_{\mathbb{Z}}$ is $0$, or $\infty$-generated. It is: in particular, it contains a $\mathbb{Z}^\infty$ subgroup ($\bigoplus_{i=1}^\infty \mathbb{Z}_i$). The original proof was due to Furuta and FS in the 80's. In some sense, this theorem is a generalization of theirs. Furuta and FS had the same family, and also used Yang-Mills theory. (Modern language (filtered) allows them to generalize it.)
+A-priori, it's not obvious that $\Theta^3_{\mathbb{Z}}$ is at all interesting. For many years after its definition, it was not known whether $\Theta^3_{\mathbb{Z}}$ is $0$, or $\infty$-generated. It is: in particular, it contains a $\mathbb{Z}^\infty$ subgroup ($\bigoplus_{i=1}^\infty \mathbb{Z}_i$). The original proof was due to Furuta and Fintushel-Stern in the 80's. In some sense, this theorem is a generalization of theirs. Furuta and Fintushel-Stern had the same family, and also used Yang-Mills theory. (Modern language (filtered) allows them to generalize it.)
 \end{remark}
 
 \begin{remark}
@@ -83,13 +85,13 @@ Let the following be the $\underline{C}$ complexes for $Y_1$ and $Y_2$.
 \begin{center}
 \includegraphics[width=0.5\linewidth]{figures/fig_lec17_towers_example.png}
 \end{center}
-\end{example}
 
 Here, $r_0$ is measuring the CS displacement of the $D_2$ arrow. The point is that if we pretend $\#$ is $\otimes$, the complex for $Y_1\#Y_2$ looks like:
 \begin{center}
 \includegraphics[width=0.4\linewidth]{figures/fig_lec17_diamond.png}
 \end{center}
 Notice that $D_2(\Theta)$ has $2$ arrows, corresponding to the $2$ summands in the Leibniz rule. Here, it's clear that to kill all the $D_2$'s, you must take the minima of all of the summands.
+\end{example}
 
 Unfortunately, it's not actually true, in general, that $\underline{C}(Y_1\#Y_2) = \underline{C}(Y_1)\otimes\underline{C}(Y_2)$. The rough reason is that it turns out that $\underline{C}(Y_1\#Y_2)$ cannot be determined from $\underline{C}(Y_1)$ and $\underline{C}(Y_2)$ alone. To see why, let's look at the potential types of generators of $\underline{C}(Y_1\#Y_2)$:
 \begin{itemize}
