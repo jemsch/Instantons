@@ -4,7 +4,8 @@
 \section*{Lecture 12 // Oct 1 // The Chern-Simons Functional \& Reducibles}
 \addcontentsline{toc}{section}{Lecture 12 -- The Chern-Simons Functional \& Reducibles}
 
-\textbf{Last time:} We defined the Chern-Simons functional
+\begin{recall}
+We defined the Chern-Simons functional
 \[
 \CS(A) = \frac{1}{8\pi^2}\int_Y \tr\left(A\wedge dA + \frac{2}{3}A\wedge A\wedge A\right)
 \]
@@ -12,12 +13,13 @@ and saw that $\grad_A \CS = \ast F_A$. We also interpreted $\Crit(\CS)$ in two w
 \[
 \Crit(\CS) = \{\text{flat connections modulo gauge}\} \leftrightarrow R.
 \]
+\end{recall}
 
 Today, we'll complete the proof of the theorem from last time.
 
-\begin{theorem}
+\begin{theorem*}[\cref{thm:crit-cs-su2-reps}]
 Critical points of the Chern-Simons functional modulo gauge are in bijection with $\SU(2)$ representations of $\pi_1(Y)$ modulo conjugation.
-\end{theorem}
+\end{theorem*}
 
 \begin{proof}[Proof (continued)]
 We must show injectivity. Let $\nabla_0, \nabla_1$ be two connections such that $\hol_p^{\nabla_0}$ and $\hol_p^{\nabla_1}$ are related by conjugation via some fixed $g_p\in \SU(2)$.
