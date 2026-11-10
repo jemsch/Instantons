@@ -1,0 +1,249 @@
+\documentclass[main]{subfiles}
+\begin{document}
+
+\section*{Lecture 10 // Sept 24 // Instantons on $S^4$}
+\addcontentsline{toc}{section}{Lecture 10 -- Instantons on S4}
+
+\begin{recall}
+We began a discussion of instantons on $S^4$. To do so, we identified $\mathbb{R}^4$ with $\mathbb{H}$ and $S^4$ with $\mathbb{HP}^1$, as well as the unit quaternions with $S^3$ and $\SU(2)$.
+\end{recall}
+
+Today, we'll wrap up our discussion of Donaldson's theorem. First, we need to construct a connection on $\mathbb{HP}^1$. To do this, we'll recall more facts about quaternions, then slog through a computation.
+
+\begin{definition}
+The imaginary part of a quaternion is $\mathrm{Im}(q)=iy+jz+kw$. Note that $\mathrm{Im}(q)$ is in $\mathfrak{su}(2)$.
+\end{definition}
+
+\begin{definition}
+The conjugate of a quaternion is $\bar q = x-iy-jz-kw$. Viewing $\mathbb{H}$ as a subset of $\Mat_{2\times 2}(\mathbb{C})$, this conjugation is the conjugate transpose of a matrix, denoted as
+\[
+q^\dagger = \begin{bmatrix}x+iy & z+iw\\ -z+iw & x-iy\end{bmatrix}^\dagger = \begin{bmatrix}\overline{x+iy} & \overline{-z+iw}\\ \overline{z+iw} & \overline{x-iy}\end{bmatrix} = \begin{bmatrix}x-iy & -z-iw\\ z-iw & x+iy\end{bmatrix}
+\]
+\end{definition}
+
+\begin{definition}
+The norm of a quaternion is $|q|^2 = q\bar q = \bar q q = x^2+y^2+z^2+w^2$.
+\end{definition}
+
+Now, recall that we constructed connections on the line bundles over $\mathbb{CP}^1$, which are
+\[
+A = (-n)\frac{z\,d\bar z}{1+|z|^2}
+\]
+\[
+F_A = (-n)\frac{d\bar z\wedge dz}{(1+|z|^2)^2}
+\]
+
+We'll do a very similar construction for $\mathbb{HP}^1$. To do so we need $d\bar q$ and $dq\wedge d\bar q$.
+
+\begin{definition}
+The $1$-form $dq$ is defined in each entry:
+\[
+dq = \begin{bmatrix}dx+i\,dy & dz+i\,dw\\ -dz+i\,dw & dx-i\,dy\end{bmatrix}
+\]
+Further,
+\[
+d\bar q = dq^\dagger = \begin{bmatrix}dx-i\,dy & -dz-i\,dw\\ dz-i\,dw & dx+i\,dy\end{bmatrix}
+\]
+\end{definition}
+
+Computing $dq\wedge d\bar q$, we get that
+\[
+dq\wedge d\bar q = \begin{bmatrix}dx+i\,dy & dz+i\,dw\\ -dz+i\,dw & dx-i\,dy\end{bmatrix}\wedge\begin{bmatrix}dx-i\,dy & -dz-i\,dw\\ dz-i\,dw & dx+i\,dy\end{bmatrix}
+\]
+{\footnotesize
+\[
+= \begin{bmatrix}
+(dx+i\,dy)\wedge(dx-i\,dy)+(dz+i\,dw)\wedge(dz-i\,dw) & (dx+i\,dy)\wedge(-dz-i\,dw)+(dz+i\,dw)\wedge(dx+i\,dy)\\
+(-dz+i\,dw)\wedge(dx-i\,dy)+(dx-i\,dy)\wedge(dz-i\,dw) & (-dz+i\,dw)\wedge(-dz-i\,dw)+(dx-i\,dy)\wedge(dx+i\,dy)
+\end{bmatrix}
+\]}
+\[
+= \begin{bmatrix}
+-2i(dx\wedge dy+dz\wedge dw) & -2(dx\wedge dz-dy\wedge dw)-2i(dx\wedge dw+dy\wedge dz)\\
+2(dx\wedge dz-dy\wedge dw)+2i(dx\wedge dw+dy\wedge dz) & -2i(dx\wedge dy+dz\wedge dw)
+\end{bmatrix}
+\]
+Note that all entries are self-dual $2$-forms in the Euclidean metric.
+
+\begin{proposition}
+The following is a well-defined connection on $\mathbb{HP}^1$:
+\[
+A = \frac{\mathrm{Im}(q\,d\bar q)}{1+|q|^2} \qquad F_A = dA+A\wedge A
+\]
+\end{proposition}
+
+\begin{remark}
+We take the imaginary part of $q\,d\bar q$ since $\mathrm{Im}(q\,d\bar q)\in\mathfrak{su}(2)$ and we want $A$ to be a connection on an $\SU(2)$ bundle. This differs from our approach for $\mathbb{CP}^1$, since the $A$ we defined before wasn't actually a connection on a $\mathrm{U}(1)$ bundle. If we wanted, we could have taken $\mathrm{im}(z\,d\bar z)$ in that numerator. But here we specifically want an $\SU(2)$ connection, so $A$ needs to be valued in the Lie algebra $\mathfrak{su}(2)$.
+\end{remark}
+
+\begin{proof}
+What follows is a long, dry, and generally unenlightening computation. Since $\mathrm{Im}(q\,d\bar q)=\frac{1}{2}(q\,d\bar q-dq\,\bar q)$ and $d|q|^2=d(q\bar q)=q\,d\bar q+dq\,\bar q$,
+\[
+\mathrm{Im}(q\,d\bar q) = q\,d\bar q-\tfrac{1}{2}d|q|^2.
+\]
+
+We now wish to compute $F_A=dA+A\wedge A$. For simplicity, we'll ignore the $\frac{1}{1+|q|^2}$ term and first compute $dB$ and $B\wedge B$ for $B=(1+|q|^2)A$.
+\[
+dB = d\big(\mathrm{Im}(q\,d\bar q)\big) = dq\wedge d\bar q
+\]
+\begin{align*}
+B\wedge B &= \mathrm{Im}(q\,d\bar q)\wedge\mathrm{Im}(q\,d\bar q):\\
+&= \left(q\,d\bar q-\tfrac{1}{2}d|q|^2\right)\wedge\left(q\,d\bar q-\tfrac{1}{2}d|q|^2\right)\\
+&= q\,d\bar q\wedge q\,d\bar q-\tfrac{1}{2}d|q|^2\wedge q\,d\bar q+\underbrace{q\,d\bar q\wedge-\tfrac{1}{2}d|q|^2}_{\substack{=-\left(-\frac{1}{2}\right)d|q|^2\,q\,d\bar q\\ =\frac{1}{2}d|q|^2\wedge q\,d\bar q}}+\underbrace{\tfrac{1}{4}d|q|^2\wedge d|q|^2}_{=0}\\
+&= q\,d\bar q\,q\,d\bar q
+\end{align*}
+
+We now expand, using $d\bar q\,q=d|q|^2-\bar q\,dq$:
+\begin{align*}
+&= q\left(d|q|^2-\bar q\,dq\right)d\bar q\\
+&= \left(q\,d|q|^2-q\bar q\,dq\right)d\bar q\\
+&= q\,d|q|^2\,d\bar q-q\bar q\,dq\wedge d\bar q\\
+&= q\,d|q|^2\,d\bar q-|q|^2\,dq\wedge d\bar q\\
+&= d|q|^2\,(q\,d\bar q)-|q|^2\,dq\wedge d\bar q
+\end{align*}
+We again expand, using that $q\,d\bar q=\mathrm{Im}(q\,d\bar q)+\frac{1}{2}d|q|^2$:
+\begin{align*}
+&= d|q|^2\left(\mathrm{Im}(q\,d\bar q)+\tfrac{1}{2}d|q|^2\right)-|q|^2\,dq\wedge d\bar q\\
+&= d|q|^2\,\mathrm{Im}(q\,d\bar q)+d|q|^2\left(\tfrac{1}{2}d|q|^2\right)-|q|^2\,dq\wedge d\bar q\\
+\intertext{\textcolor{red}{To Do: figure out in-between steps}}
+&= d|q|^2\,\mathrm{Im}(q\,d\bar q)-|q|^2\,dq\wedge d\bar q
+\end{align*}
+Thus $B\wedge B=d|q|^2\,\mathrm{Im}(q\,d\bar q)-|q|^2\,dq\wedge d\bar q$. All together, we have that
+\[
+dB+B\wedge B = dq\wedge d\bar q+d|q|^2\,\mathrm{Im}(q\,d\bar q)-|q|^2\,dq\wedge d\bar q.
+\]
+To get $dA+A\wedge A$, since $A=\frac{1}{1+|q|^2}B$, we must use the Leibniz rule: $d(A)=d(f\cdot B)=f\,dB+df\cdot B$.
+
+Thus $dA+A\wedge A=\frac{1}{1+|q|^2}\,dB+df\cdot B+\left(\frac{1}{1+|q|^2}\right)^2(B\wedge B)$. Computing each part,
+\begin{align*}
+f\,dB+df\cdot B &= \frac{dq\wedge d\bar q}{1+|q|^2}+d\left(\frac{1}{1+|q|^2}\right)\mathrm{Im}(q\,d\bar q)\\
+&= \frac{dq\wedge d\bar q}{1+|q|^2}+\frac{-d|q|^2}{(1+|q|^2)^2}\mathrm{Im}(q\,d\bar q)
+\end{align*}
+\[
+f^2(B\wedge B) = \frac{1}{(1+|q|^2)^2}\left(d|q|^2\,\mathrm{Im}(q\,d\bar q)-|q|^2\,dq\wedge d\bar q\right)
+\]
+Thus
+\begin{align*}
+dA+A\wedge A &= \frac{dq\wedge d\bar q}{1+|q|^2}-\frac{d|q|^2}{(1+|q|^2)^2}\mathrm{Im}(q\,d\bar q)+\frac{1}{(1+|q|^2)^2}\left(d|q|^2\,\mathrm{Im}(q\,d\bar q)-|q|^2\,dq\wedge d\bar q\right)\\
+&= \frac{dq\wedge d\bar q}{1+|q|^2}-\frac{d|q|^2}{(1+|q|^2)^2}\mathrm{Im}(q\,d\bar q)+\frac{1}{(1+|q|^2)^2}d|q|^2\,\mathrm{Im}(q\,d\bar q)-\frac{1}{(1+|q|^2)^2}|q|^2\,dq\wedge d\bar q\\
+&= \frac{dq\wedge d\bar q}{1+|q|^2}-\frac{1}{(1+|q|^2)^2}|q|^2\,dq\wedge d\bar q\\
+&= \frac{(1+|q|^2)(dq\wedge d\bar q)-|q|^2\,dq\wedge d\bar q}{(1+|q|^2)^2}\\
+&= \frac{dq\wedge d\bar q}{(1+|q|^2)^2}. \qedhere
+\end{align*}
+\end{proof}
+
+Therefore $F_A$ is self-dual with respect to the Euclidean metric.
+
+\begin{exercise}
+Check $A$ does extend to a genuine $k=1$ bundle on $\mathbb{HP}^1$. One can also figure out which bundle $A$ shall live on by calculating $c_2$.
+\end{exercise}
+
+You should be left with one main objection. The assertion that $dq\wedge d\bar q$ is self-dual was with respect to the metric on $\mathbb{R}^4$, but we're working on $S^4$! $A$ is an SDYM connection with respect to the Euclidean metric $g$ on $\mathbb{R}^4$, so it's self-dual on each of our two charts, but what we actually want is an SDYM connection on $S^4$! What metric should we use? One such metric is the round metric on $S^4$.
+
+\begin{definition}
+\textcolor{red}{To-Do: [insert definition of round metric]}
+\end{definition}
+
+However, on charts, it \underline{doesn't} agree with $g_{\mathrm{euc}}$. To resolve this, we must discuss conformal transformations.
+
+\subsection*{Conformal Transformations}
+
+\begin{definition}
+Two metrics $g_0,g_1$ on $M$ are said to be conformal if $g_1=\lambda g_0$, $\lambda>0$. $f:(M,g_M)\to(N,g_N)$ is conformal if $f^\ast(g_N)$ is conformal to $g_M$.
+\end{definition}
+
+\begin{lemma}
+If $g_0,g_1$ are conformal metrics on a $4$-manifold, then their Hodge stars $\ast_0$ and $\ast_1$ agree on $2$-forms.
+\end{lemma}
+
+\begin{proof}
+If $g_1=\lambda g_0$, and $\{e_1,e_2,e_3,e_4\}$ is an orthonormal basis of $T_pM$ with respect to $g_0$,
+\[
+\ast_0(e_1\wedge e_2)=e_3\wedge e_4
+\]
+\begin{align*}
+\ast_1(e_1\wedge e_2) &= \lambda\ast_1\left(\frac{e_1}{\sqrt{\lambda}}\wedge\frac{e_2}{\sqrt{\lambda}}\right)\\
+&= \lambda\left(\frac{e_3}{\sqrt{\lambda}}\wedge\frac{e_4}{\sqrt{\lambda}}\right)\\
+&= e_3\wedge e_4. \qedhere
+\end{align*}
+\end{proof}
+
+So a $2$-form is SD with respect to $g_0$ if and only if it is SD with respect to $g_1$, if $g_0\sim g_1$.
+
+\begin{fact}
+$g_{\mathrm{round}}$ on $S^4$ is conformal to $g_{\mathrm{euc}}$ on each chart $U_\alpha$ of $S^4$, e.g., the stereographic projection of $g_{\mathrm{round}}$ is conformal to $g_{\mathrm{euc}}$.
+\end{fact}
+
+Explicitly,
+\[
+g_{\mathrm{round}} = \frac{4}{(1+|q|^2)^2}g_{\mathrm{euc}}
+\]
+
+\begin{note}
+The round metric is essentially a generalization of arc length. Consider $S^1$: the distance between any $2$ angles $\theta_0,\theta_1$ can be measured by arc length. If we remove the point at $-\pi$ and embed $S^1$ as the unit circle in $\mathbb{R}^2$, we may use stereographic projection to the $y$-axis.
+\end{note}
+
+\textcolor{red}{To-Do: Add Figure}
+
+Thus $A$ is an SDYM connection with respect to $(S^4,g_{\mathrm{round}})$.
+
+Another important consequence is that conformal transformations act on the SDYM moduli space.
+
+\begin{claim}
+If $f:(M,g)\to(M,g)$ is a conformal diffeomorphism and $\nabla$ is an SDYM connection with respect to $g$, then $f^\ast(\nabla)$ is an SDYM connection with respect to $g$.
+\end{claim}
+
+\[
+\begin{array}{ccccc}
+\nabla & & f^\ast(\nabla) & & f^\ast(\nabla)\\
+g & \substack{\rightsquigarrow\\ \text{change}\\ \text{of coords}} & f^\ast(g) & \substack{\rightsquigarrow\\ \text{conformal!}} & g
+\end{array}
+\]
+
+Thus given any $\nabla$ an SDYM connection on $S^4$, we get many more via conformal transformations. What are conformal transformations of $S^4$? We first ask an easier question: What are the conformal transformations of $S^2$? Recall that these are given by M\"obius transformations.
+
+\begin{definition}
+\textcolor{red}{To-Do: [insert definition of M\"obius transformations on $S^2$]}
+\end{definition}
+
+\begin{proposition}
+A diffeomorphism $f:(S^2,g)\to(S^2,g)$ is conformal if and only if it is a M\"obius transformation.
+\end{proposition}
+
+\begin{proof}
+\textcolor{red}{To-Do: [insert proof]}
+\end{proof}
+
+More generally, we can view these M\"obius transformations as accounting for the symmetries of $S^2$ and symmetries of $\mathbb{R}^2$, thought of as the image of $S^2$ under stereographic projection. They are:
+\begin{enumerate}
+\item rotations, parametrized by $\mathrm{SO}(3)$
+\item translations, parametrized by $\mathbb{R}^2$
+\item scaling/dilation, parametrized by $[0,\infty)$
+\end{enumerate}
+
+\textcolor{red}{To-Do: Add Figure}
+
+This gives a $6$-dimensional space of conformal symmetries of $S^2$.
+
+Likewise, the conformal transformations on $S^4$ are
+\begin{enumerate}
+\item rotations, parametrized by $\mathrm{SO}(5)$
+\item translations, parametrized by $\mathbb{R}^4$
+\item scaling/dilation, parametrized by $[0,\infty)$
+\end{enumerate}
+
+Now that we've characterized the conformal transformations of $S^4$, we can apply them to our SDYM connection $A$ on $(S^4,g_{\mathrm{round}})$.
+
+\begin{proposition}
+$A$ is spherically symmetric, i.e., up to $\textcolor{red}{\mc{G}}$, $A$ is invariant under $\mathrm{SO}(5)$ action.
+\end{proposition}
+
+\begin{proof}
+\textcolor{red}{To Do: Insert Pf}
+\end{proof}
+
+This leaves us with a $5$-dimensional space of SDYM instantons by scaling and translating $A$. Explicitly, for $c\in\mathbb{R}^4$ and $\lambda>0$,
+
+\textcolor{red}{To-Do: Finish this section \& wrap up discussion.}
+
+\end{document}
